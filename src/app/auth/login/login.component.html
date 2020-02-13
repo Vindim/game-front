@@ -1,4 +1,5 @@
 <p class="text-md-center">Вход в систему</p>
+<div class="alert alert-{{message.type}}" *ngIf="message.text">{{message.text}}</div>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group" [ngClass]="{'has-error': loginForm.get('email').invalid && loginForm.get('email').touched}">
         <label for="email">Email</label>

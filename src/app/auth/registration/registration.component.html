@@ -1,26 +1,47 @@
 <p class="text-md-center">Регистрация</p>
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': registrationForm.get('email').invalid && registrationForm.get('email').touched}">
         <label for="email">Email</label>
         <input type="text" class="form-control" id="email" placeholder="Ваш email" formControlName="email">
-        <span class="form-text form-error-text">Error</span>
+        <span class="form-text form-error-text" *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').touched">
+            <span *ngIf="registrationForm.get('email').errors.required">Поле email не может быть пустым</span>
+            <span *ngIf="registrationForm.get('email').errors.email">Введите корректный email</span>
+            <span *ngIf="registrationForm.get('email').errors.exists">Такой email уже используется</span>
+        </span>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': registrationForm.get('password').invalid && registrationForm.get('password').touched}">
         <label for="password">Пароль</label>
         <input type="password" class="form-control" id="password" placeholder="Ваш пароль" formControlName="password">
-        <span class="form-text form-error-text">Error</span>
+        <span class="form-text form-error-text" *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched">
+            <span *ngIf="registrationForm.get('password').errors.required">Поле пароль не может быть пустым</span>
+            <span *ngIf="registrationForm.get('password').errors.minlength">
+                Пароль должен быть больше {{registrationForm.get('password').errors.minlength['requiredLength']}} символов
+            </span>
+        </span>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched}">
         <label for="confirm_password">Подтверждение пароля</label>
         <input type="password" class="form-control" id="confirm_password" placeholder="Подтвердите пароль" formControlName="confirmPassword">
-        <span class="form-text form-error-text">Error</span>
+        <span class="form-text form-error-text" *ngIf="registrationForm.invalid && registrationForm.get('confirmPassword').touched">
+            <span *ngIf="registrationForm.get('confirmPassword').errors && registrationForm.get('confirmPassword').errors.required">
+                Поле подтверждение пароля не может быть пустым
+            </span>
+            <span *ngIf="registrationForm.invalid && registrationForm.errors && registrationForm.errors.mustMatch">
+                Пароль и подтверждение пароля не совпадают
+            </span>
+        </span>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': registrationForm.get('name').invalid && registrationForm.get('name').touched}">
         <label for="nickname">Имя</label>
         <input type="text" class="form-control" id="nickname" placeholder="Имя пользователя в игре" formControlName="name">
-        <span class="form-text form-error-text">Error</span>
+        <span class="form-text form-error-text" *ngIf="registrationForm.get('name').invalid && registrationForm.get('name').touched">
+            <span *ngIf="registrationForm.get('name').errors.required">Поле Имя не может быть пустым</span>
+            <span *ngIf="registrationForm.get('name').errors.minlength">
+                Имя должно быть больше {{registrationForm.get('name').errors.minlength['requiredLength']}} символов
+            </span>
+        </span>
     </div>
-    <div class="form-check">
+    <div class="form-check" [ngClass]="{'has-error' : registrationForm.get('agree').invalid && registrationForm.get('agree').touched}">
         <input type="checkbox" class="form-check-input" id="agree" formControlName="agree">
         <label for="agree">Согласен с правилами</label>
     </div>

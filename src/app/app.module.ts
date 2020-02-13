@@ -7,13 +7,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NotFoundComponent} from './shared/components/not-found/not-found.component';
 import {AuthModule} from './auth/auth.module';
-import { SystemComponent } from './system/system.component';
+import {UserService} from './shared/services/user.service';
+import {AuthService} from './shared/services/auth.service';
+import {AuthGuard} from './shared/services/auth.guard';
 
 @NgModule({
     declarations: [
         AppComponent,
-        NotFoundComponent,
-        SystemComponent
+        NotFoundComponent
     ],
     imports: [
         BrowserModule,
@@ -22,7 +23,7 @@ import { SystemComponent } from './system/system.component';
         AuthModule,
         AppRoutingModule
     ],
-    providers: [],
+    providers: [UserService, AuthService, AuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule {

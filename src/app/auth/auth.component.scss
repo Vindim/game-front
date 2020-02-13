@@ -27,3 +27,7 @@
     vertical-align: baseline;
     padding: 10px 25px 10px 25px;
 }
+
+.form-group.has-error input {
+    color: #e21e00 !important;
+}
